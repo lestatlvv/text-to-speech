@@ -1,0 +1,3 @@
+Kokoro is an open-weight text-to-speech model with eighty-two million parameters.
+It converts written language into phonemes, then into a natural sounding waveform.
+This short sample demonstrates local text-to-voice without a cloud API.

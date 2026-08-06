@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kokoro — Text to Voice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Sora:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <main class="shell">
+      <header class="hero">
+        <p class="brand">Kokoro</p>
+        <h1>Hear text become voice.</h1>
+        <p class="lede">
+          An interactive demo of Kokoro-82M: graphemes turn into phonemes, then into
+          a 24&nbsp;kHz waveform you can play instantly.
+        </p>
+      </header>
+
+      <section class="studio" aria-label="Text to speech studio">
+        <form id="speak-form" class="composer">
+          <label class="field">
+            <span>Text</span>
+            <textarea
+              id="text"
+              name="text"
+              rows="5"
+              maxlength="4000"
+              required
+              placeholder="Type something you’d like Kokoro to speak…"
+            >Kokoro is an open-weight text-to-speech model with eighty-two million parameters. It turns written language into natural sounding speech right on your machine.</textarea>
+          </label>
+
+          <div class="controls">
+            <label class="field">
+              <span>Voice</span>
+              <select id="voice" name="voice"></select>
+            </label>
+
+            <label class="field speed-field">
+              <span>Speed <em id="speed-value">1.00×</em></span>
+              <input id="speed" name="speed" type="range" min="0.5" max="2" step="0.05" value="1" />
+            </label>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="speak-btn">Speak</button>
+            <button type="button" id="inspect-btn" class="ghost">Show pipeline</button>
+          </div>
+        </form>
+
+        <aside class="stage" aria-live="polite">
+          <div class="meter" id="meter" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p class="status" id="status">Ready when you are.</p>
+          <audio id="player" controls></audio>
+          <dl class="stats" id="stats" hidden>
+            <div><dt>Duration</dt><dd id="stat-duration">—</dd></div>
+            <div><dt>Generate</dt><dd id="stat-elapsed">—</dd></div>
+            <div><dt>Realtime</dt><dd id="stat-rtf">—</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="pipeline" id="pipeline" hidden>
+        <h2>How text-to-voice works here</h2>
+        <ol class="steps" id="steps"></ol>
+        <div class="chunks" id="chunks"></div>
+      </section>
+    </main>
+    <script src="/static/app.js" type="module"></script>
+  </body>
+</html>
